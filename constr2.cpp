@@ -33,5 +33,5 @@ int main()
 }
 //output
 /*Roll Number: 18
-Name: labdhi
+Name: kunal
 Fee: 10000*/
