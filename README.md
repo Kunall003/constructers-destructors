@@ -1,87 +1,133 @@
-Constructors and Destructors
-Aim
-To study and implement constructors and destructors in C++.
 
-Theory
-Constructors and destructors are special member functions of a class in C++ that are used to initialize and clean up objects, respectively.
-
-Constructors
-Definition: A constructor is a special member function that is automatically called when an object of the class is created. It has the same name as the class and does not have a return type.
-Purpose: To initialize the object's data members.
-Types:
-Default Constructor: Takes no arguments.
-Parameterized Constructor: Takes one or more arguments.
-Copy Constructor: Initializes an object using another object of the same class.
-Move Constructor: Transfers resources from a temporary object to a new object (introduced in C++11).
-Syntax:
-
-class ClassName {
+# Constructor-and-Destructor
+# Aim:
+To use and implement C++ Constructor and Destructor.
+# Software used:
+Visual Studio code.
+# Theory:
+## Constructor:
+A constructor is a special member function of a class that is automatically called when an object of that class is created. Constructors are used to initialize the objects of a class.
+### Basic Constructor
+A constructor has the same name as the class and does not have a return type (not even `void`).
+```cpp
+class MyClass
+{
 public:
-    ClassName(); // Default constructor
-    ClassName(int arg); // Parameterized constructor
-    ClassName(const ClassName &obj); // Copy constructor
-    ClassName(ClassName &&obj); // Move constructor
+    MyClass()    // Constructor
+    { 
+        cout << "Constructor is called!" << endl;
+    }
 };
-Destructors
-Definition: A destructor is a special member function that is automatically called when an object goes out of scope or is explicitly deleted. It has the same name as the class, preceded by a tilde (~), and does not take any arguments or return a value.
-Purpose: To release resources allocated to the object.
-Characteristics:
-There can only be one destructor in a class.
-It cannot be overloaded.
-It is called in the reverse order of the constructor calls.
-Syntax:
+```
+### 2. Parameterized Constructor
+You can pass arguments to a constructor to initialize data members with specific values.
+```cpp
+class MyClass
+{
+private:
+    int x;
 
-class ClassName {
 public:
-    ~ClassName(); // Destructor
+    MyClass(int a)    // Parameterized constructor
+    {  
+        x = a;
+        cout << "x is initialized to " << x << endl;
+    }
 };
-Algorithms:
-Constructor inside class
-Start
+```
+### 3. Copy Constructor
+A copy constructor is a constructor that creates a new object as a copy of an existing object.
+```cpp
+class MyClass
+{
+private:
+    int x;
 
-Define Class date:
+public:
+    MyClass(int a)    // Parameterized constructor
+    {  
+        x = a;
+    }
 
-Create a class named date with three private data members: d (for day), m(for month), and y (for year).
-Define Constructor date():
+    MyClass(const MyClass &obj)  // Copy constructor
+    {  
+        x = obj.x;
+    }
 
-Inside the class, define a public constructor date() that:
-Prompts the user to enter the day (d), month (m), and year (y).
-Stores the entered values in the respective member variables.
-Displays the date in the format d/m/y.
-Inside the main() Function:
+    void display()
+    {
+        std::cout << "x = " << x << std::endl;
+    }
+};
+```
+## Destructor:
+A destructor is the opposite of a constructor and is used to clean up when an object is destroyed. It has the same name as the class but is preceded by a tilde `~`.
+```cpp
+class MyClass
+{
+public:
+    ~MyClass()  // Destructor
+    {  
+        std::cout << "Destructor is called!" << std::endl;
+    }
+};
+```
+## Differences
+| Features                | Constructor                    | Destructor                     |
+|---------------------------|----------------------------------------|--------------------------------------|
+| **Purpose**            | Initializes the object	 | Cleans up before object is destroyed |
+| **Name**   | Same as class name	 | Same as class name but preceded by `~` |
+| **Called When**| Object is created            | Object is destroyed.  |
+| **Parameters**        | Can take parameters            | Cannot take parameters            |
+| **Overloading**| Can be overloaded (multiple constructors) | Cannot be overloaded (only one destructor) |
 
-Declare an object today of class date.
-This triggers the automatic call of the constructor.
-The constructor will then execute, prompting the user to input values and displaying the date in the format d/m/y.
-End
+# Algorithms:
+### Constructor inside class
+1) Start
 
-Destructor
-Start
+2) Define Class `date`:   
+    -  Create a class named `date` with three private data members: `d` (for day), `m`(for month), and `y` (for year).
 
-Define Global Variable:
+3) Define Constructor `date()`:   
+    - Inside the class, define a public constructor `date()` that:
+    - Prompts the user to enter the day `(d)`, month `(m)`, and year `(y)`.
+    - Stores the entered values in the respective member variables.
+    - Displays the date in the format `d/m/y`.
 
-Declare a global variable count and initialize it to 0. This variable will track the number of Student objects created and destroyed.
-Define Class Student:
+4) Inside the `main()` Function:   
+    - Declare an object `today` of class date.
+    - This triggers the automatic call of the constructor.
+    - The constructor will then execute, prompting the user to input values and displaying the date in the format `d/m/y`.
+5) End
 
-Inside the class Student, define two public member functions: a constructor and a destructor.
-Constructor Student():
+### Destructor
+1) Start
 
-Increment count by 1 whenever a Student object is created.
-Display the current count of created objects using the message: "Number of objects created: count".
-Destructor ~Student():
+2) Define Global Variable:
+    - Declare a global variable `count` and initialize it to `0`. This variable will track the number of `Student` objects created and destroyed.
 
-Decrement count by 1whenever a Student object is destroyed.
-Display the current count of destroyed objects (before decrement) using the message: "No. of objects destroyed: count + 1".
-Inside the main() Function:
+3) Define Class `Student`:
+    - Inside the class `Student`, define two public member functions: a constructor and a destructor.
 
-Create three Student objects: aa, bb, and cc.
-This will call the constructor for each object, incrementing count three times and displaying the number of objects created after each increment.
-Create Nested Scope:
+4) Constructor `Student()`:
+    - Increment `count` by `1` whenever a `Student` object is created.
+    - Display the current count of created objects using the message:
+`"Number of objects created: count".`
 
-Inside the nested block ({}), create a fourth Student object dd.
-This will call the constructor, incrementing count by 1 and displaying the number of objects created.
-When the block ends, object dd goes out of scope and is destroyed, invoking the destructor and decreasing count by 1.
-End of main():
+5) Destructor ~Student():
+    - Decrement `count` by `1`whenever a `Student` object is destroyed.
+    - Display the current count of destroyed objects (before decrement) using the message:
+      `"No. of objects destroyed: count + 1"`.
 
-As main() ends, objects aa, bb, and cc go out of scope, one by one, invoking their destructors and decrementing count by 1 after each destruction.
-End
+6) Inside the `main()` Function:
+    - Create three `Student` objects: `aa`, `bb`, and `cc`.
+      - This will call the constructor for each object, incrementing `count` three times and displaying the number of objects created after each increment.
+
+7) Create Nested Scope:
+    - Inside the nested block (`{}`), create a fourth `Student` object `dd`.
+      - This will call the constructor, incrementing `count` by 1 and displaying the number of objects created.
+    - When the block ends, object `dd` goes out of scope and is destroyed, invoking the destructor and decreasing `count` by 1.
+
+8) End of `main()`:
+    - As `main()` ends, objects `aa`, `bb`, and `cc` go out of scope, one by one, invoking their destructors and decrementing `count` by 1 after each destruction.
+9) End
